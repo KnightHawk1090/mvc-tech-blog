@@ -28,3 +28,25 @@ router.post('/', withAuth, (req, res) => {
         });
     }
 });
+
+// delete comments. if no comment is found return 404 error. if error occurs during deletion return 500 error
+router.delete('/:id', (req, res) => {
+    Comment.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+      .then(dbCommentData => {
+        if (!dbCommentData) {
+          res.status(404).json({ message: 'No comment found with this id' });
+          return;
+        }
+        res.json(dbCommentData);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  });
+  
+  module.exports = router;
