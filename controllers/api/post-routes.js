@@ -104,3 +104,25 @@ router.put('/:id', withAuth, (req, res) => {
         res.status(500).json(err);
     });
 });
+
+// delete a post. if no post is found return 404 error. if error occurs during deletion return 500 error
+router.delete('/:id', withAuth, (req, res) => {
+    Post.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+      .then(dbPostData => {
+        if (!dbPostData) {
+          res.status(404).json({ message: 'No post found with this id' });
+          return;
+        }
+        res.json(dbPostData);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  });
+  
+  module.exports = router;
