@@ -50,3 +50,4 @@ THEN I am able to view posts and comments but I am prompted to log in again befo
 https://github.com/KnightHawk1090/mvc-tech-blog
 
 ### Application link via Heroku
+https://mvc-tech-blog-ep.herokuapp.com/
